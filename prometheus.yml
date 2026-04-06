@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "urlshortener"
+    metrics_path: "/stats"
+    static_configs:
+      - targets: ["web:5050"]

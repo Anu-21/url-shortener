@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    container_name: urlshortener-web
+    ports:
+      - "5050:5050"
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    restart: always
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: urlshortener-redis
+    volumes:
+      - redis-data:/data
+    restart: always
+    networks:
+      - app-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: urlshortener-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: always
+    networks:
+      - app-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: urlshortener-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    depends_on:
+      - prometheus
+    restart: always
+    networks:
+      - app-network
+
+volumes:
+  redis-data:
+
+networks:
+  app-network:
+    driver: bridge

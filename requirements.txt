@@ -1,0 +1,8 @@
+flask==3.0.0
+redis==5.0.1
+gunicorn==21.2.0
+validators==0.22.0
+python-dotenv==1.0.0
+pytest==7.4.3
+requests==2.31.0
+fakeredis==2.21.0
