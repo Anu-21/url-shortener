@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "url-shortener"
         APP_PORT   = "5050"
+        PATH       = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     }
 
     stages {
