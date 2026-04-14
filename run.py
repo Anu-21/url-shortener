@@ -1,6 +1,10 @@
-from app import create_app
+from flask import Flask
 
-app = create_app()
+app = Flask(__name__)
 
-if __name__ == '__main__':
+@app.route('/')
+def home():
+    return "URL Shortener App is Running Successfully!"
+
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
